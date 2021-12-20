@@ -27,7 +27,7 @@ namespace im_param {
         class T, 
         glm::qualifier P
     >
-    glm::mat<Columns, Rows, typename T, P> mat_with_value(T value)
+    glm::mat<Columns, Rows, typename T, P> glm_mat_with_value(T value)
     {
         glm::mat<Columns, Rows, typename T, P> result;
         for (int i = 0; i < Columns; ++i)
@@ -52,9 +52,9 @@ namespace im_param {
         backend_type& backend, 
         const std::string& name, 
         glm::mat<Columns, Rows, typename T, P>& value, 
-        glm::mat<Columns, Rows, typename T, P> min = mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(0)),
-        glm::mat<Columns, Rows, typename T, P> max = mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(1)),
-        glm::mat<Columns, Rows, typename T, P> scale = mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(1))
+        glm::mat<Columns, Rows, typename T, P> min = glm_mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(0)),
+        glm::mat<Columns, Rows, typename T, P> max = glm_mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(1)),
+        glm::mat<Columns, Rows, typename T, P> scale = glm_mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(1))
     )
     {
         glm::mat<Columns, Rows, typename T, P> transposed = glm::transpose(value);
