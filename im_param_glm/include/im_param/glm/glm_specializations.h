@@ -57,16 +57,18 @@ namespace im_param {
         glm::mat<Columns, Rows, typename T, P> scale = glm_mat_with_value<Columns, Rows, typename T, P>(static_cast<typename T>(1))
     )
     {
-        glm::mat<Columns, Rows, typename T, P> transposed = glm::transpose(value);
-        glm::mat<Columns, Rows, typename T, P> transposed_min = glm::transpose(min);
-        glm::mat<Columns, Rows, typename T, P> transposed_max = glm::transpose(max);
-        glm::mat<Columns, Rows, typename T, P> transposed_scale = glm::transpose(scale);
+        glm::mat<Rows, Columns, typename T, P> transposed = glm::transpose(value);
+        glm::mat<Rows, Columns, typename T, P> transposed_min = glm::transpose(min);
+        glm::mat<Rows, Columns, typename T, P> transposed_max = glm::transpose(max);
+        glm::mat<Rows, Columns, typename T, P> transposed_scale = glm::transpose(scale);
         for (int j = 0; j < Rows; ++j)
         {
-            glm::vec<Columns, typename T, P> row = transposed[j];
-            glm::vec<Columns, typename T, P> row_min = transposed_min[j];
-            glm::vec<Columns, typename T, P> row_max = transposed_max[j];
-            glm::vec<Columns, typename T, P> row_scale = transposed_scale[j];
+            using RowType = glm::vec<Columns, typename T, P>;
+
+            RowType row = transposed[j];
+            RowType row_min = transposed_min[j];
+            RowType row_max = transposed_max[j];
+            RowType row_scale = transposed_scale[j];
             
             std::string row_name = name + std::string("[") + std::to_string(j) + std::string("]");
             parameter(backend, row_name, row, row_min, row_max, row_scale);
